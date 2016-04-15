@@ -30,35 +30,6 @@ public class TwitterCrawler implements ShutdownStreamListener{
         return;
     }
 
-    public List<Status> searchTweets(String queryString) {
-
-        try {
-
-            Query query = new Query(queryString);
-            QueryResult result;
-
-            do {
-
-//                result = twitter.trends();
-//                twitter.tweets();
-//                twitter.timelines();
-                result = twitter.search(query);
-                List<Status> tweets = result.getTweets();
-                for (Status tweet : tweets) {
-                    System.out.println("@" + tweet.getUser().getScreenName() + " posted:\n" + tweet.getText());
-                    System.out.println("---");
-                }
-
-                return tweets;
-            } while ((query = result.nextQuery()) != null);
-
-        } catch (TwitterException te) {
-            te.printStackTrace();
-            System.out.println("Failed to search tweets: " + te.getMessage());
-            System.exit(-1);
-        }
-        return null;
-    }
 
     public void setStream(StatusListener listener, String queryString) {
         ConfigurationBuilder builder = new ConfigurationBuilder();
@@ -74,7 +45,7 @@ public class TwitterCrawler implements ShutdownStreamListener{
         if (!queryString.isEmpty()) {
             FilterQuery query = new FilterQuery(queryString);
             query.language("en");
-            stream.filter(queryString);
+            stream.filter(query);
         } else {
             stream.sample();
         }

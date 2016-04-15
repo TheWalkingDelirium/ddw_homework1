@@ -40,10 +40,12 @@ public class TwitterHashtagAnalyzer implements ShutdownStreamListener, RunGateLi
 
     @Override
     public void onStatus(Status status) {
+        if (!status.getLang().equals("en"))
+            return;
 
         client.addDocument(status.getText());
 
-        if (client.getCorpusSize() == 300) {
+        if (client.getCorpusSize() == 500) {
             runGateClient();
         }
     }

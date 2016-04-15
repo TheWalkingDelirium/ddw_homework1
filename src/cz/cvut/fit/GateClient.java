@@ -274,7 +274,7 @@ public class GateClient  {
         frequencyAnalyzer.setStopWords(stopwords);
 
         final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(hashtagList);
-        final Dimension dimension = new Dimension(1980, 1920);
+        final Dimension dimension = new Dimension(600, 600);
         final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
         wordCloud.setBackground(new CircleBackground(300))    ;
@@ -304,5 +304,6 @@ public class GateClient  {
     public int getCorpusSize() {
         return corpus.size();
     }
+
 
 }
